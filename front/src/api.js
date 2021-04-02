@@ -7,13 +7,13 @@ const api = axios.create({
   },
 });
 
-export const getPostList = async () => {
+export const getPostList = async (pageNum, order, categoryNum, limitNum) => {
   const postList = await api.get("/api/list", {
     params: {
-      page: 1,
-      ord: "asc",
-      category: [1],
-      limit: 3,
+      page: pageNum,
+      ord: order,
+      category: [categoryNum],
+      limit: limitNum,
     },
   });
   return postList.data.data;
@@ -28,7 +28,7 @@ export const getADList = async () => {
   const ADList = await api.get("/api/ads", {
     params: {
       page: 1,
-      limit: 1,
+      limit: 10,
     },
   });
   return ADList.data.data;
