@@ -1,49 +1,19 @@
-import React, { useEffect, useState } from "react";
-import "./App.scss";
-import axios from "axios";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Detail from "./Component/Detail";
+import Main from "./Component/Main";
+import "./Style/App.scss";
 
 function App() {
-  const [list, setList] = useState([]);
-  const api = axios.create({
-    baseURL: "https://problem.comento.kr",
-    header: {
-      Accept: "application/json",
-    },
-  });
-
-  const getPostList = async () => {
-    const temp = await api.get("/api/list", {
-      params: {
-        page: 1,
-        ord: "asc",
-        category: [1],
-        limit: 10,
-      },
-    });
-    setList(temp.data.data);
-    console.log(list);
-  };
-
-  const getCategoryList = async () => {
-    const categoryList = await api.get("/api/category");
-  };
-
-  useEffect(() => {
-    getPostList();
-  }, []);
-
-  // getCategoryList();
-
   return (
-    <div className="App">
-      {list.map((item, index) => (
-        <div key={index}>
-          <li> {item.id}</li>
-          <li> {item.contents}</li>
-          <li> {item.title}</li>
-        </div>
-      ))}
-    </div>
+    <>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path={"/"} component={Main} />
+          <Route exact path={"/:id"} component={Detail} />
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 }
 
