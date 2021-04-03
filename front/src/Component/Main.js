@@ -6,40 +6,42 @@ import Filter from "./Filter";
 import Nav from "./Nav";
 
 const Main = () => {
+  const [type, setType] = useState("1");
+  // category_id : 1 => apple
+  // category_id : 2 => banana
+  // category_id : 3 => coconut
+  const [limit, setLimit] = useState(10);
   const [list, setList] = useState([]);
-  const [loadingList, setLoadingList] = useState([]);
   const [adList, setAdList] = useState([]);
-  let temp = [];
 
   const fetchPostList = async (pageNum, order, categoryNum, limitNum) => {
     let temp = await getPostList(pageNum, order, categoryNum, limitNum);
-    console.log(temp);
     setList(temp);
   };
 
-  const fetchADList = async () => {
-    let temp = await getADList();
+  const fetchADList = async (pageNum, limitNum) => {
+    let temp = await getADList(pageNum, limitNum);
     setAdList(temp);
   };
 
   useEffect(() => {
-    fetchPostList(1, "asc", 3, 1);
-    // fetchADList();
-  }, []);
+    fetchPostList(1, "asc", Number(type), limit);
+    fetchADList(1, limit);
+  }, [type, limit]);
 
-  // category_id : 1 => apple
-  // category_id : 2 => banana
-  // category_id : 3 => coconut
-  // 이걸로 바꿔서 return 해주면 됨. 따라서 category는 불러올 필요 없음.
+  const infiniteScroll = () => {
+    let scrollHeight = document.documentElement.scrollHeight;
+    let scrollTop = document.documentElement.scrollTop;
+    let clientHeight = document.documentElement.clientHeight;
 
-  console.log(list);
-  for (let i = 0; i < 10; i++) {
-    temp.push(list[i]);
-  }
+    if (scrollTop + clientHeight === scrollHeight) {
+      setLimit(limit + 10);
+    } else if (scrollTop < 1) {
+      setLimit(10);
+    }
+  };
 
-  console.log(temp);
-  // setLoadingList(temp);
-  // console.log(adList);
+  window.addEventListener("scroll", infiniteScroll);
 
   return (
     <main>
@@ -49,19 +51,27 @@ const Main = () => {
           <span>로그인</span>
         </div>
         <div className="main__container">
-          <Filter />
+          <Filter type={type} setType={setType} />
           {list.map((item, index) => (
-            <div>
+            <div className="main__content" key={index}>
               <Link key={index} to={`/` + item.id}>
-                {item.title}
+                <div>
+                  <div className="main__content--header">
+                    <div>카테고리 : {item.category_id}</div>
+                    <div>유저번호 : {item.user_id}</div>
+                    <div>{item.created_at}</div>
+                  </div>
+                  <h3>{item.title}</h3>
+                </div>
+                <div>{item.contents}</div>
               </Link>
             </div>
           ))}
         </div>
       </div>
-      {adList.map((item, index) => (
+      {/* {adList.map((item, index) => (
         <div key={index}>{item.contents}</div>
-      ))}
+      ))} */}
     </main>
   );
 };

@@ -24,11 +24,11 @@ export const getCategoryList = async () => {
   return categoryList.data.category;
 };
 
-export const getADList = async () => {
+export const getADList = async (pageNum, limitNum) => {
   const ADList = await api.get("/api/ads", {
     params: {
-      page: 1,
-      limit: 10,
+      page: pageNum,
+      limit: limitNum,
     },
   });
   return ADList.data.data;

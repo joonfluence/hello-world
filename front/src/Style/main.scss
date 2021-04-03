@@ -3,22 +3,28 @@
 main {
   .main__wrapper {
     display: flex;
-  }
-  //   .main__container {
-  //   }
+    .main__login {
+      width: 235px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $lightgreen 0% 0% no-repeat padding-box;
+      border-radius: 5px;
+      opacity: 1;
+      span {
+        font-size: 22px;
+        color: $white;
+      }
+    }
 
-  .main__login {
-    width: 235px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: $lightgreen 0% 0% no-repeat padding-box;
-    border-radius: 5px;
-    opacity: 1;
-    span {
-      font-size: 22px;
-      color: $white;
+    .main__content {
+      border: 1px solid black;
+      margin: 30px;
+      .main__content--header {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 }
