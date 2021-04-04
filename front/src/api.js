@@ -12,7 +12,7 @@ export const getPostList = async (pageNum, order, categoryNum, limitNum) => {
     params: {
       page: pageNum,
       ord: order,
-      category: [categoryNum],
+      category: categoryNum,
       limit: limitNum,
     },
   });

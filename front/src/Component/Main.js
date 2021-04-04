@@ -6,11 +6,12 @@ import Filter from "./Filter";
 import Nav from "./Nav";
 
 const Main = () => {
-  const [type, setType] = useState("1, 2, 3");
+  const [type, setType] = useState([1, 2, 3]);
   // category_id : 1 => apple
   // category_id : 2 => banana
   // category_id : 3 => coconut
   const [limit, setLimit] = useState(10);
+  const [order, setOrder] = useState("asc");
   const [list, setList] = useState([]);
   const [adList, setAdList] = useState([]);
   const [feedIndex, setFeedIndex] = useState(0);
@@ -41,9 +42,9 @@ const Main = () => {
   };
 
   useEffect(() => {
-    fetchPostList(1, "asc", Number(type), limit);
+    fetchPostList(1, order, type, limit);
     fetchADList(1, limit);
-  }, [type, limit]);
+  }, [type, limit, order]);
 
   window.addEventListener("scroll", () => {
     let scrollHeight = Math.max(
@@ -75,7 +76,12 @@ const Main = () => {
           <span>로그인</span>
         </div>
         <div className="main__container">
-          <Filter type={type} setType={setType} />
+          <Filter
+            type={type}
+            setType={setType}
+            order={order}
+            setOrder={setOrder}
+          />
           <>
             {list.map((item, index) => (
               <div className="main__content" key={index}>

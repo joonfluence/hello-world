@@ -1,26 +1,45 @@
 import React, { useState } from "react";
 import "../Style/Modal.scss";
 
-const Filter = ({ type, setType }) => {
+const Filter = ({ type, setType, order, setOrder }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [category, setCategory] = useState(type);
+
   const onChangeType = (e) => {
     let temp = e.target.value;
     setCategory(temp);
   };
 
+  const onChangeOrder = (e) => {
+    setOrder(e.target.value);
+  };
+
   const onSubmitModal = async (e) => {
     e.preventDefault();
-    setType(Number(category));
+    setType([Number(category)]);
     setModalOpen(false);
   };
   return (
     <div className="filter__wrapper">
       <div>
-        <input type="radio" /> 오름차순
+        <input
+          id="asc"
+          type="radio"
+          checked={order === "asc"}
+          value="asc"
+          onChange={onChangeOrder}
+        />
+        <label htmlFor="asc">오름차순</label>
       </div>
       <div>
-        <input type="radio" /> 내림차순
+        <input
+          id="des"
+          type="radio"
+          checked={order === "des"}
+          value="des"
+          onChange={onChangeOrder}
+        />
+        <label htmlFor="des">내림차순</label>
       </div>
       <div>
         <button onClick={() => setModalOpen(!modalOpen)}>필터</button>
@@ -40,7 +59,7 @@ const Filter = ({ type, setType }) => {
                   <div>
                     <input
                       className="form__input"
-                      type="radio"
+                      type="checkbox"
                       id="type 1"
                       checked={category === "1"}
                       onChange={onChangeType}
@@ -51,7 +70,7 @@ const Filter = ({ type, setType }) => {
                   <div>
                     <input
                       className="form__input"
-                      type="radio"
+                      type="checkbox"
                       id="type 2"
                       checked={category === "2"}
                       onChange={onChangeType}
@@ -62,7 +81,7 @@ const Filter = ({ type, setType }) => {
                   <div>
                     <input
                       className="form__input"
-                      type="radio"
+                      type="checkbox"
                       id="type 3"
                       checked={category === "3"}
                       onChange={onChangeType}
