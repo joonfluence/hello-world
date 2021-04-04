@@ -14,10 +14,7 @@ const Main = () => {
   const [order, setOrder] = useState("asc");
   const [list, setList] = useState([]);
   const [adList, setAdList] = useState([]);
-  const [feedIndex, setFeedIndex] = useState(0);
-  const [adIndex, setAdIndex] = useState(0);
   const [feed, setFeed] = useState([]);
-  let feedTemp = [];
 
   const fetchPostList = async (pageNum, order, categoryNum, limitNum) => {
     let temp = await getPostList(pageNum, order, categoryNum, limitNum);
@@ -29,22 +26,71 @@ const Main = () => {
     setAdList(temp);
   };
 
-  const sliceContent = (index, adIndex, newItem) => {
-    let temp = [
-      ...list.slice(index, index + 3),
-      ...newItem.slice(adIndex, adIndex + 1),
-      ...list.slice(index + 3, index + 6),
-      ...newItem.slice(adIndex + 1, adIndex + 2),
-      ...list.slice(index + 6, index + 9),
-      ...newItem.slice(adIndex + 2, adIndex + 3),
-    ];
+  const sliceContent = (limit) => {
+    let temp = [];
+    let oddNum = 0;
+    let oddNumber = 0;
+    let evenNumber = 0;
+    let oddAdNum = 0;
+    let evenAdNum = 0;
+
+    if (limit % 20 !== 0) {
+      // 10, 30, 50, 70, 90, 110 ...
+      // 2, 3, 4, 5, ...
+      // 10, 15, 20, 25 ...
+      // 0, 5, 10, 15 ...
+      console.log("실행됨");
+      oddNum = Math.floor(limit / 20) + 2;
+      oddAdNum = Math.floor(limit / 20) * 5;
+      oddNumber = oddNum * 5;
+    } else {
+      // 20, 40, 60, 80 ...
+      // 2, 3, 4, 5, ...
+      // 12, 17, 22, 27 ...
+      // 2, 7, 12, 17 ...
+      console.log("실행됨2");
+      oddNum = Math.floor((limit - 10) / 20) + 2;
+      oddAdNum = Math.floor((limit - 10) / 20) * 5;
+      oddNumber = oddNum * 5;
+
+      evenNumber = oddNumber + 2;
+      evenAdNum = oddAdNum + 2;
+    }
+
+    if (limit % 20 !== 0) {
+      temp = [
+        ...list.slice(limit - oddNumber, limit - oddNumber + 3),
+        ...adList.slice(oddAdNum, oddAdNum + 1),
+        ...list.slice(limit - oddNumber + 3, limit - oddNumber + 6),
+        ...adList.slice(oddAdNum + 1, oddAdNum + 2),
+        ...list.slice(limit - oddNumber + 6, limit - oddNumber + 8),
+      ];
+    } else {
+      temp = [
+        ...list.slice(limit - evenNumber, limit - evenNumber + 1),
+        ...adList.slice(evenAdNum, evenAdNum + 1),
+        ...list.slice(limit - evenNumber + 1, limit - evenNumber + 4),
+        ...adList.slice(evenAdNum + 1, evenAdNum + 2),
+        ...list.slice(limit - evenNumber + 4, limit - evenNumber + 7),
+        ...adList.slice(evenAdNum + 2, evenAdNum + 3),
+      ];
+    }
+
     return temp;
   };
 
+  console.log(sliceContent(limit));
+
   useEffect(() => {
+    // console.log("실행됨5");
     fetchPostList(1, order, type, limit);
     fetchADList(1, limit);
   }, [type, limit, order]);
+
+  // 초기 렌더링
+  useEffect(() => {
+    setFeed(feed.concat(sliceContent(limit)));
+  }, [list]);
 
   window.addEventListener("scroll", () => {
     let scrollHeight = Math.max(
@@ -58,13 +104,12 @@ const Main = () => {
     let clientHeight = document.documentElement.clientHeight;
 
     if (scrollTop + clientHeight === scrollHeight) {
-      // setFeedIndex(feedIndex + 3);
-      // setAdIndex(adIndex + 2);
       setLimit(limit + 10);
     } else if (scrollTop < 1) {
       // setLimit(10);
+      // setFeed(feed.concat(...sliceContent(0, 0, adList)));
       // setFeedIndex(0);
-      setAdIndex(0);
+      // setAdIndex(0);
     }
   });
 
@@ -83,7 +128,7 @@ const Main = () => {
             setOrder={setOrder}
           />
           <>
-            {list.map((item, index) => (
+            {feed.map((item, index) => (
               <div className="main__content" key={index}>
                 {item.category_id ? (
                   <Link key={index} to={`/` + item.id}>
