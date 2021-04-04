@@ -6,13 +6,17 @@ import Filter from "./Filter";
 import Nav from "./Nav";
 
 const Main = () => {
-  const [type, setType] = useState("1");
+  const [type, setType] = useState("1, 2, 3");
   // category_id : 1 => apple
   // category_id : 2 => banana
   // category_id : 3 => coconut
   const [limit, setLimit] = useState(10);
   const [list, setList] = useState([]);
   const [adList, setAdList] = useState([]);
+  const [feedIndex, setFeedIndex] = useState(0);
+  const [adIndex, setAdIndex] = useState(0);
+  const [feed, setFeed] = useState([]);
+  let feedTemp = [];
 
   const fetchPostList = async (pageNum, order, categoryNum, limitNum) => {
     let temp = await getPostList(pageNum, order, categoryNum, limitNum);
@@ -24,24 +28,44 @@ const Main = () => {
     setAdList(temp);
   };
 
+  const sliceContent = (index, adIndex, newItem) => {
+    let temp = [
+      ...list.slice(index, index + 3),
+      ...newItem.slice(adIndex, adIndex + 1),
+      ...list.slice(index + 3, index + 6),
+      ...newItem.slice(adIndex + 1, adIndex + 2),
+      ...list.slice(index + 6, index + 9),
+      ...newItem.slice(adIndex + 2, adIndex + 3),
+    ];
+    return temp;
+  };
+
   useEffect(() => {
     fetchPostList(1, "asc", Number(type), limit);
     fetchADList(1, limit);
   }, [type, limit]);
 
-  const infiniteScroll = () => {
-    let scrollHeight = document.documentElement.scrollHeight;
-    let scrollTop = document.documentElement.scrollTop;
+  window.addEventListener("scroll", () => {
+    let scrollHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    let scrollTop = Math.max(
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    );
     let clientHeight = document.documentElement.clientHeight;
 
     if (scrollTop + clientHeight === scrollHeight) {
+      // setFeedIndex(feedIndex + 3);
+      // setAdIndex(adIndex + 2);
       setLimit(limit + 10);
     } else if (scrollTop < 1) {
-      setLimit(10);
+      // setLimit(10);
+      // setFeedIndex(0);
+      setAdIndex(0);
     }
-  };
-
-  window.addEventListener("scroll", infiniteScroll);
+  });
 
   return (
     <main>
@@ -52,26 +76,41 @@ const Main = () => {
         </div>
         <div className="main__container">
           <Filter type={type} setType={setType} />
-          {list.map((item, index) => (
-            <div className="main__content" key={index}>
-              <Link key={index} to={`/` + item.id}>
-                <div>
-                  <div className="main__content--header">
-                    <div>카테고리 : {item.category_id}</div>
-                    <div>유저번호 : {item.user_id}</div>
-                    <div>{item.created_at}</div>
+          <>
+            {list.map((item, index) => (
+              <div className="main__content" key={index}>
+                {item.category_id ? (
+                  <Link key={index} to={`/` + item.id}>
+                    <div>
+                      <div className="main__content--header">
+                        <div>카테고리 : {item.category_id}</div>
+                        <div>유저번호 : {item.user_id}</div>
+                        <div>{item.created_at}</div>
+                      </div>
+                    </div>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.contents}</p>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="main__AD">
+                    <img
+                      className="main__AD--image"
+                      src={`https://cdn.comento.kr/assignment/${item.img}`}
+                      alt="cat"
+                    />
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.contents}</p>
+                    </div>
                   </div>
-                  <h3>{item.title}</h3>
-                </div>
-                <div>{item.contents}</div>
-              </Link>
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
+          </>
         </div>
       </div>
-      {/* {adList.map((item, index) => (
-        <div key={index}>{item.contents}</div>
-      ))} */}
     </main>
   );
 };

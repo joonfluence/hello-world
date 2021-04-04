@@ -21,9 +21,21 @@ main {
     .main__content {
       border: 1px solid black;
       margin: 30px;
+      &:nth-child(4n + 1) {
+        background-color: red;
+      }
       .main__content--header {
         display: flex;
         justify-content: space-between;
+      }
+    }
+    .main__AD {
+      display: flex;
+      background-color: blue;
+      .main__AD--image {
+        width: 310px;
+        height: 179px;
+        border: 1px solid $grey_2;
       }
     }
   }
