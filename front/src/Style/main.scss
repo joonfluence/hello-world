@@ -26,14 +26,5 @@ main {
         justify-content: space-between;
       }
     }
-    .main__AD {
-      display: flex;
-      background-color: blue;
-      .main__AD--image {
-        width: 310px;
-        height: 179px;
-        border: 1px solid $grey_2;
-      }
-    }
   }
 }
