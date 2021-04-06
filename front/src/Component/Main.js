@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getADList, getPostList } from "../api";
+import { getPostList, getADList } from "../api";
 import "../Style/main.scss";
 import "../Style/Ad.scss";
 import Ad from "./Ad";
 import Filter from "./Filter";
 import Nav from "./Nav";
+import ListContext, { ListConsumer } from "../Context/List";
+import Content from "./Content";
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
@@ -15,30 +17,22 @@ const Main = () => {
   // category_id : 3 => coconut
   const [limit, setLimit] = useState(10);
   const [order, setOrder] = useState("asc");
-  const [list, setList] = useState([]);
+  const { state, actions } = useContext(ListContext);
   const [adList, setAdList] = useState([]);
-  let timer = 1;
+  const [timer, changeTimer] = useState(true);
 
+  const checkIsAd = (i) => i % 4 === 2;
   const fetchPostList = async (pageNum, order, categoryNum, limitNum) => {
-    let temp = await getPostList(pageNum, order, categoryNum, limitNum);
-    setList(temp);
+    const temp = await getPostList(pageNum, order, categoryNum, limitNum);
+    actions.setList(temp);
   };
 
   const fetchADList = async (pageNum, limitNum) => {
-    let temp = await getADList(pageNum, limitNum);
+    const temp = await getADList(pageNum, limitNum);
     setAdList(temp);
   };
 
-  const checkIsAd = (i) => {
-    if (i % 4 === 2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   useEffect(() => {
-    setLoading(false);
     fetchPostList(1, order, type, limit);
   }, [type, limit, order]);
 
@@ -46,39 +40,37 @@ const Main = () => {
     fetchADList(1, limit);
   }, [limit]);
 
-  const scrollEvent = () => {
-    let scrollHeight = Math.max(
-      document.documentElement.scrollHeight,
-      document.body.scrollHeight
-    );
-    let scrollTop = Math.max(
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
-    let clientHeight = document.documentElement.clientHeight;
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1000);
+  }, []);
 
-    if (scrollHeight - scrollTop - clientHeight < 100) {
-      // 여기서 쓰로틀링을 적용해주자.
-      if (timer) {
-        timer = setTimeout(function () {
-          timer = null;
-        }, 100);
-        console.log("실행되나?");
-      } else {
-        setLimit(limit + 10);
-        return;
+  useEffect(() => {
+    const scrollEvent = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+
+      if (scrollHeight - scrollTop - clientHeight < 100) {
+        if (timer) {
+          setTimeout(() => changeTimer(false), 2000);
+        } else {
+          changeTimer(true);
+          setLimit(limit + 10);
+        }
       }
-    }
-  };
-
-  window.addEventListener("scroll", scrollEvent);
+    };
+    window.addEventListener("scroll", scrollEvent);
+    return () => {
+      window.removeEventListener("scroll", scrollEvent);
+    };
+  }, [timer]);
 
   return (
     <main>
       {loading ? (
-        <div>로딩중</div>
+        <div>로딩중...</div>
       ) : (
-        <>
+        <div>
           <Nav />
           <div className="main__wrapper">
             <div className="main__login">
@@ -91,31 +83,17 @@ const Main = () => {
                 order={order}
                 setOrder={setOrder}
               />
-              <>
-                {list.map((item, i) => (
-                  <div>
-                    <div className="main__content" key={i}>
-                      <Link key={i} to={`/` + item.id}>
-                        <div>
-                          <div className="main__content--header">
-                            <div>카테고리 : {item.category_id}</div>
-                            <div>유저번호 : {item.user_id}</div>
-                            <div>{item.created_at}</div>
-                          </div>
-                        </div>
-                        <div>
-                          <h3>{item.title}</h3>
-                          <p>{item.contents}</p>
-                        </div>
-                      </Link>
-                    </div>
-                    {checkIsAd(i) ? <Ad item={adList[(i - 2) / 4]} /> : null}
-                  </div>
-                ))}
-              </>
+              {state.list.map((item, i) => (
+                <div className="main__content" key={item.id}>
+                  <Link to={`/` + item.id}>
+                    <Content item={item} />
+                  </Link>
+                  {checkIsAd(i) ? <Ad item={adList[(i - 2) / 4]} /> : null}
+                </div>
+              ))}
             </div>
           </div>
-        </>
+        </div>
       )}
     </main>
   );
