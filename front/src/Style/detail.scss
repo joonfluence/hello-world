@@ -1,3 +1,58 @@
-.detail__container {
-  background-color: blue;
+@import "variable.scss";
+
+.detail__wrapper {
+  margin-top: 50px;
+  .detail__content {
+    border: 1px solid $lightgreen;
+    margin: 0 auto;
+    width: 1140px;
+
+    div {
+      padding: 0 30px 0 30px;
+    }
+
+    .detail__content--title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 21px 0 6px 0;
+      color: $blackgrey_2;
+    }
+
+    .detail__content--description {
+      color: $deepgrey;
+    }
+
+    .detail__content--date {
+      margin: 15px 0 21px 0;
+      color: $lightgrey;
+    }
+  }
+
+  .reply__container {
+    margin: 0 auto;
+    width: 1140px;
+
+    .reply__number {
+      margin-top: 31px;
+    }
+    .reply__content {
+      border: 1px solid $grey_2;
+      margin-top: 30px;
+      &:nth-child(2) {
+        margin-top: 10px;
+      }
+      .reply__content--name {
+        padding: 15px;
+        color: $darkgrey;
+      }
+      .reply__content--description {
+        padding: 20px;
+        color: $deepgrey;
+      }
+      .reply__content--date {
+        padding: 15px;
+        color: $lightgrey;
+      }
+    }
+  }
 }

@@ -1,39 +1,69 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router";
-import ListContext from "../Context/List";
+import { getPostDetail } from "../api";
 import "../Style/detail.scss";
-import Content from "./Content";
+import Nav from "./Nav";
 
 const Detail = ({
   match: {
     params: { id },
   },
 }) => {
-  const { state } = useContext(ListContext);
+  const [detail, setDetail] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const fetchPostDetail = async (id) => {
+    const temp = await getPostDetail(id);
+    console.log(temp);
+    setDetail(temp);
+  };
 
   useEffect(() => {
-    console.log(state.list);
-    // 여기서 call을 해줘야 한다. 혹은 Context에서 보관 중인 상태를 불러와야 한다.
-    // 그리고 해당 정보를 불러와줘야 한다.
-    // 여기서 id와 일치한 item만 렌더링해주면 된다.
-    // 여기서 context를 활용할 수 있을 것이다.
-    // const {
-    // } = props;
-    // console.log(id);
+    setTimeout(() => setLoading(false), 1000);
+  }, []);
+
+  useEffect(() => {
+    fetchPostDetail(id);
   }, []);
 
   return (
-    <div>
-      {state.list.map((item, i) => (
-        <>
-          {parseInt(id) === item.id ? (
-            <div className="main__content" key={item.id}>
-              <Content item={item} />
+    <>
+      {loading ? (
+        <div>로딩중...</div>
+      ) : (
+        <div>
+          <Nav />
+          <div className="detail__wrapper">
+            <div className="detail__content">
+              <div className="detail__content--title">{detail.title}</div>
+              <div className="detail__content--description">
+                {detail.contents}
+              </div>
+              <div className="detail__content--date">
+                created_at({detail.created_at.substring(0, 10)})
+              </div>
             </div>
-          ) : null}
-        </>
-      ))}
-    </div>
+            <div className="reply__container">
+              <div className="reply__number">
+                {`답변 ` + detail.reply.length}
+              </div>
+              {detail.reply.map((item, i) => (
+                <div className="reply__content">
+                  <div className="reply__content--name">{item.user.name}</div>
+                  <hr />
+                  <div className="reply__content--description">
+                    {item.contents}
+                  </div>
+                  <div className="reply__content--date">
+                    created_at({item.created_at.substring(0, 10)})
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 export default withRouter(Detail);

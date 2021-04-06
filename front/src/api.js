@@ -21,19 +21,16 @@ export const getPostList = async (pageNum, order, categoryNum, limitNum) => {
   return data;
 };
 
-// export const getPostDetail = async (id) => {
-//   const {
-//     data: { data },
-//   } = await api.get("/api/list", {
-//     params: {
-//       page: pageNum,
-//       ord: order,
-//       category: categoryNum,
-//       limit: limitNum,
-//     },
-//   });
-//   return data;
-// }
+export const getPostDetail = async (id) => {
+  const {
+    data: { data },
+  } = await api.get("/api/view", {
+    params: {
+      id,
+    },
+  });
+  return data;
+};
 
 export const getCategoryList = async () => {
   const {
