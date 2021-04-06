@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPostList, getADList } from "../api";
 import "../Style/main.scss";
@@ -6,25 +6,24 @@ import "../Style/Ad.scss";
 import Ad from "./Ad";
 import Filter from "./Filter";
 import Nav from "./Nav";
-import ListContext, { ListConsumer } from "../Context/List";
-import Content from "./Content";
 
 const Main = () => {
   const [loading, setLoading] = useState(true);
   const [type, setType] = useState([1, 2, 3]);
-  // category_id : 1 => apple
-  // category_id : 2 => banana
-  // category_id : 3 => coconut
   const [limit, setLimit] = useState(10);
   const [order, setOrder] = useState("asc");
-  const { state, actions } = useContext(ListContext);
+  const [list, setList] = useState([]);
   const [adList, setAdList] = useState([]);
   const [timer, changeTimer] = useState(true);
+
+  const CATEGORY_ID_1 = "apple";
+  const CATEGORY_ID_2 = "banana";
+  const CATEGORY_ID_3 = "coconut";
 
   const checkIsAd = (i) => i % 4 === 2;
   const fetchPostList = async (pageNum, order, categoryNum, limitNum) => {
     const temp = await getPostList(pageNum, order, categoryNum, limitNum);
-    actions.setList(temp);
+    setList(temp);
   };
 
   const fetchADList = async (pageNum, limitNum) => {
@@ -83,13 +82,42 @@ const Main = () => {
                 order={order}
                 setOrder={setOrder}
               />
-              {state.list.map((item, i) => (
-                <div className="main__content" key={item.id}>
-                  <Link to={`/` + item.id}>
-                    <Content item={item} />
-                  </Link>
+              {list.map((item, i) => (
+                <>
+                  <div className="main__content--wrapper" key={item.id}>
+                    <Link to={`/` + item.id}>
+                      <div className="main__header">
+                        <div>
+                          <div className="main__header--container">
+                            <div className="main__header--category">
+                              {item.category_id === 1
+                                ? CATEGORY_ID_1
+                                : item.category_id === 2
+                                ? CATEGORY_ID_2
+                                : CATEGORY_ID_3}
+                            </div>
+                            <div className="main__header--id">{item.id}</div>
+                          </div>
+                          <div className="main__header--container">
+                            <div className="main__header--userID">
+                              {item.user_id}
+                            </div>
+                            <div className="main__header--date">
+                              created_at({item.created_at.substring(0, 10)})
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="main__content--container">
+                        <h3 className="main__content--title">{item.title}</h3>
+                        <div className="main__content--description">
+                          {item.contents}
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
                   {checkIsAd(i) ? <Ad item={adList[(i - 2) / 4]} /> : null}
-                </div>
+                </>
               ))}
             </div>
           </div>

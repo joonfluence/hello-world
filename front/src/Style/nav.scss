@@ -1,10 +1,16 @@
 @import "variable.scss";
 
-hr {
-  width: 100%;
-}
 .main__navigation {
+  width: 1140px;
   height: 70px;
+  text-align: left;
+  margin: 0 auto;
   color: $blackgrey_1;
   font-size: 16px;
+  box-shadow: 0px 1px 5px $whitegrey_2;
+
+  div {
+    width: 217px;
+    padding: 23px 0 23px 0;
+  }
 }

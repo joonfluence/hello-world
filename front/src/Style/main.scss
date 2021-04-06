@@ -3,6 +3,9 @@
 main {
   .main__wrapper {
     display: flex;
+    width: 1140px;
+    margin: 0 auto;
+
     .main__login {
       width: 235px;
       height: 60px;
@@ -18,12 +21,53 @@ main {
       }
     }
 
-    .main__content {
+    .main__content--wrapper {
+      width: 865px;
       border: 1px solid black;
-      margin: 30px;
-      .main__content--header {
+      margin: 30px 30px 30px 40px;
+
+      .main__header--container,
+      .main__content--container {
+        padding: 0 30px 0 30px;
+      }
+
+      .main__header--container {
         display: flex;
         justify-content: space-between;
+
+        .main__header--category {
+          padding: 20px 0 27px 0px;
+          color: $darkgrey;
+        }
+        .main__header--id {
+          text-align: right;
+        }
+        .main__header--userID {
+          color: $lightgreen;
+        }
+        .main__header--date {
+          color: $deepgrey;
+        }
+      }
+
+      .main__content--container {
+        .main__content--title {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: $blackgrey_2;
+          width: 799px;
+          font-size: 18px;
+        }
+        .main__content--description {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: $deepgrey;
+          width: 802px;
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
       }
     }
   }

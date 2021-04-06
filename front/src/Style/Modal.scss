@@ -1,9 +1,16 @@
 @import "variable.scss";
 
 .filter__wrapper {
+  width: 865px;
+  margin-left: 40px;
   display: flex;
-  flex: 1;
-  & > div:nth-child(3) {
+
+  .filter__order,
+  .filter__btn > button {
+    font-size: 13px;
+    color: $lightgrey;
+  }
+  .filter__btn {
     margin-left: auto;
   }
 }

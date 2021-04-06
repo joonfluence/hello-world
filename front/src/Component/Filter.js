@@ -21,7 +21,7 @@ const Filter = ({ type, setType, order, setOrder }) => {
   };
   return (
     <div className="filter__wrapper">
-      <div>
+      <div className="filter__order">
         <input
           id="asc"
           type="radio"
@@ -31,7 +31,7 @@ const Filter = ({ type, setType, order, setOrder }) => {
         />
         <label htmlFor="asc">오름차순</label>
       </div>
-      <div>
+      <div className="filter__order">
         <input
           id="des"
           type="radio"
@@ -41,7 +41,7 @@ const Filter = ({ type, setType, order, setOrder }) => {
         />
         <label htmlFor="des">내림차순</label>
       </div>
-      <div>
+      <div className="filter__btn">
         <button onClick={() => setModalOpen(!modalOpen)}>필터</button>
         {modalOpen && (
           <Modal
