@@ -8,7 +8,9 @@ const api = axios.create({
 });
 
 export const getPostList = async (pageNum, order, categoryNum, limitNum) => {
-  const postList = await api.get("/api/list", {
+  const {
+    data: { data },
+  } = await api.get("/api/list", {
     params: {
       page: pageNum,
       ord: order,
@@ -16,20 +18,38 @@ export const getPostList = async (pageNum, order, categoryNum, limitNum) => {
       limit: limitNum,
     },
   });
-  return postList.data.data;
+  return data;
 };
 
+// export const getPostDetail = async (id) => {
+//   const {
+//     data: { data },
+//   } = await api.get("/api/list", {
+//     params: {
+//       page: pageNum,
+//       ord: order,
+//       category: categoryNum,
+//       limit: limitNum,
+//     },
+//   });
+//   return data;
+// }
+
 export const getCategoryList = async () => {
-  const categoryList = await api.get("/api/category");
-  return categoryList.data.category;
+  const {
+    data: { category },
+  } = await api.get("/api/category");
+  return category;
 };
 
 export const getADList = async (pageNum, limitNum) => {
-  const ADList = await api.get("/api/ads", {
+  const {
+    data: { data },
+  } = await api.get("/api/ads", {
     params: {
       page: pageNum,
       limit: limitNum,
     },
   });
-  return ADList.data.data;
+  return data;
 };
