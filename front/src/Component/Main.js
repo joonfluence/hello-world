@@ -19,13 +19,6 @@ const Main = () => {
   const CATEGORY_ID_2 = "banana";
   const CATEGORY_ID_3 = "coconut";
 
-  const checkIsAd = (i) => i % 4 === 2;
-
-  const fetchPostList = async (pageNum, order, categoryNum, limitNum) => {
-    const temp = await getPostList(pageNum, order, categoryNum, limitNum);
-    setList(temp);
-  };
-
   const fetchADList = async (pageNum, limitNum) => {
     const temp = await getADList(pageNum, limitNum);
     setAdList(temp);
@@ -34,6 +27,13 @@ const Main = () => {
   useEffect(() => {
     fetchADList(1, limit);
   }, [limit]);
+
+  const fetchPostList = async (pageNum, order, categoryNum, limitNum) => {
+    const temp = await getPostList(pageNum, order, categoryNum, limitNum);
+    setList(temp);
+  };
+
+  const checkIsAd = (i) => i % 4 === 2;
 
   useEffect(() => {
     fetchPostList(1, order, type, limit);
@@ -109,7 +109,9 @@ const Main = () => {
                     </div>
                   </Link>
                 </div>
-                {checkIsAd(i) ? <Ad item={adList[(i - 2) / 4]} /> : null}
+                {adList.length > 0 && checkIsAd(i) ? (
+                  <Ad item={adList[(i - 2) / 4]} />
+                ) : null}
               </>
             ))}
           </div>

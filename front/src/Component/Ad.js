@@ -2,6 +2,7 @@ import React from "react";
 import "../Style/Ad.scss";
 
 const Ad = ({ item }) => {
+  console.log("실행됨4");
   return (
     <div className="main__AD">
       <div className="main__AD--container">
