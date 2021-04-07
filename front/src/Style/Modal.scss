@@ -1,63 +1,103 @@
 @import "variable.scss";
 
 .filter__wrapper {
-  width: 865px;
-  margin-left: 40px;
+  width: 93.755%;
   display: flex;
+  margin-left: 40px;
 
   .filter__order,
-  .filter__btn > button {
+  .filter__btn--open {
     font-size: 13px;
     color: $lightgrey;
   }
+
+  .filter__order {
+    height: 19px;
+
+    &:nth-child(2) {
+      margin-left: 10px;
+    }
+
+    .filter__order--checkbox {
+      display: none;
+    }
+
+    .filter__order--checkbox + .filter__order--button {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 16px;
+      margin-bottom: 2px;
+      margin-right: 4px;
+      cursor: pointer;
+      background-color: $lightgrey;
+    }
+
+    .filter__order--checkbox:checked + .filter__order--button,
+    .filter__order--checkbox:checked + .filter__order--button {
+      background-color: $lightgreen;
+    }
+
+    .filter__order--label {
+      cursor: pointer;
+    }
+  }
+
   .filter__btn {
     margin-left: auto;
+    .filter__btn--open {
+      margin-left: auto;
+      border: 1px solid $lightgrey;
+      background-color: $white;
+    }
   }
 }
 
-.modal__background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  top: 0;
-  left: 0%;
-  z-index: 3;
-}
-
-.modal__wrapper {
-  position: absolute;
-  width: 460px;
-  height: 268px;
-  top: 35%;
-  left: 50%;
-  margin: 0 0 0 -250px;
-  background: #eee;
-  z-index: 4;
-  & > div > h2 {
-    font-size: 1.5rem;
-    padding-top: 1.5rem;
-  }
-
-  .modal__btn--close {
+.modal {
+  .modal__background {
     position: absolute;
-    right: 0%;
-    width: 3rem;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0%;
+    z-index: 3;
   }
 
-  .modal__container {
-    margin: 0 auto;
-    width: 80%;
+  .modal__wrapper {
+    position: absolute;
+    width: 460px;
+    height: 268px;
+    top: 35%;
+    left: 50%;
+    margin: 0 0 0 -250px;
+    background: #eee;
+    z-index: 4;
+    & > div > h2 {
+      font-size: 1.5rem;
+      padding-top: 1.5rem;
+    }
 
-    form {
-      display: flex;
-      flex-direction: column;
+    .modal__btn--close {
+      position: absolute;
+      right: 0%;
+      width: 3rem;
+    }
 
-      .modal__btn--submit {
-        width: 99px;
-        height: 40px;
-        background-color: $lightgreen;
-        margin-left: auto;
+    .modal__wrapper--container {
+      margin: 0 auto;
+      width: 80%;
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        .modal__btn--submit {
+          width: 99px;
+          height: 40px;
+          background-color: $lightgreen;
+          margin-left: auto;
+        }
       }
     }
   }

@@ -3,11 +3,13 @@
 main {
   .main__wrapper {
     display: flex;
-    width: 1140px;
+    width: 59.375%;
     margin: 0 auto;
+    margin-top: 50px;
 
     .main__login {
-      width: 235px;
+      margin: 0 auto;
+      width: 20.613%;
       height: 60px;
       display: flex;
       justify-content: center;
@@ -21,53 +23,65 @@ main {
       }
     }
 
-    .main__content--wrapper {
-      width: 865px;
-      border: 1px solid black;
-      margin: 30px 30px 30px 40px;
+    .main__wrapper--container {
+      width: 79.377%;
+    }
 
-      .main__header--container,
-      .main__content--container {
-        padding: 0 30px 0 30px;
+    .main__wrapper--content,
+    .main__AD {
+      border: 1px solid $grey_2;
+      margin: 17px 30px 30px 40px;
+      padding: 20px 30px 20px 30px;
+    }
+
+    .main__header--top {
+      display: flex;
+      justify-content: space-between;
+      .main__header--category {
+        color: $darkgrey;
       }
-
-      .main__header--container {
-        display: flex;
-        justify-content: space-between;
-
-        .main__header--category {
-          padding: 20px 0 27px 0px;
-          color: $darkgrey;
-        }
-        .main__header--id {
-          text-align: right;
-        }
-        .main__header--userID {
-          color: $lightgreen;
-        }
-        .main__header--date {
-          color: $deepgrey;
-        }
+      .main__header--id {
+        color: $lightgrey;
       }
+    }
 
-      .main__content--container {
-        .main__content--title {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          color: $blackgrey_2;
-          width: 799px;
-          font-size: 18px;
-        }
-        .main__content--description {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          color: $deepgrey;
-          width: 802px;
-          font-size: 16px;
-          margin-bottom: 20px;
-        }
+    .main__header--line {
+      height: 1px;
+      margin: 11px 0px 15px 0px;
+      background-color: $grey_2;
+    }
+
+    .main__header--bottom {
+      display: flex;
+      .main__header--userID {
+        color: $lightgreen;
+      }
+      .main__header--vertical {
+        margin: 5px 10px 5px 10px;
+        width: 1px;
+        height: 15px;
+        background-color: $grey_2;
+      }
+      .main__header--date {
+        color: $deepgrey;
+      }
+    }
+
+    .main__content {
+      .main__content--title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: $blackgrey_2;
+        font-size: 18px;
+      }
+      .main__content--description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: $deepgrey;
+        font-size: 16px;
+        margin-bottom: 20px;
       }
     }
   }

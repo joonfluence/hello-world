@@ -4,7 +4,7 @@ import "../Style/nav.scss";
 const Nav = () => {
   return (
     <nav className="main__navigation">
-      <div>‘[제출일] 이름’ 을 작성해주세요:)</div>
+      <div className="main__navigation--name">4월 8일 이준호</div>
     </nav>
   );
 };

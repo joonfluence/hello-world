@@ -1,30 +1,34 @@
 @import "variable.scss";
 
 .main__AD {
-  margin: 0 auto;
   display: flex;
-  width: 865px;
-  padding: 55.5px 30.5px 20.5px 30px;
-  border: 1px solid $grey_2;
-
-  .main__AD--image {
-    width: 310px;
-    height: 179px;
-    border: 1px solid $grey_2;
-  }
 
   .main__AD--container {
-    padding-left: 29.5px;
+    margin-right: 20px;
+
+    &:nth-child(1) {
+      width: 42.774%;
+    }
+
+    &:nth-child(2) {
+      width: 57.226%;
+    }
+    .main__AD--image {
+      width: 100%;
+      height: 179px;
+      border: 1px solid $grey_2;
+    }
+
     .main__AD--title {
       @include ellipsis(2, 27.5px);
-      width: 463px;
+      // width: 463px;
       font-size: 18px;
       font-weight: 600;
     }
 
     .main__AD--description {
       @include ellipsis(4, 25px);
-      width: 465px;
+      // width: 465px;
     }
   }
 }

@@ -3,13 +3,13 @@ import "../Style/Modal.scss";
 
 const Modal = ({ onChangeType, onSubmitModal, setModalOpen, category }) => {
   return (
-    <div>
+    <div className="modal">
       <div className="modal__background"></div>
       <div className="modal__wrapper">
-        <div className="modal__btn--close" onClick={() => setModalOpen(false)}>
-          <div>X</div>
+        <div className="modal__btn" onClick={() => setModalOpen(false)}>
+          <div className="modal__btn--close">X</div>
         </div>
-        <div className="modal__container">
+        <div className="modal__wrapper--container">
           <h2>필터</h2>
           <form onSubmit={onSubmitModal}>
             <div>
