@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Style/Modal.scss";
 import Modal from "./Modal";
 
@@ -19,6 +19,15 @@ const Filter = ({ type, setType, order, setOrder }) => {
   const onChangeOrder = (e) => {
     setOrder(e.target.attributes[1].value);
   };
+
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [modalOpen]);
+
   return (
     <div className="filter__wrapper">
       <div className="filter__order">
@@ -67,6 +76,7 @@ const Filter = ({ type, setType, order, setOrder }) => {
         {modalOpen && (
           <Modal
             category={category}
+            modalOpen={modalOpen}
             onChangeType={onChangeType}
             onSubmitModal={onSubmitModal}
             setModalOpen={setModalOpen}

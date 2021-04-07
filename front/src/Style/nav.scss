@@ -12,6 +12,7 @@
     width: 59.375%;
     margin: 0 auto;
     padding: 23px 0 23px 0;
+
     @include mobile {
       width: inherit;
       margin-left: 40px;

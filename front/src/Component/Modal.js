@@ -1,7 +1,15 @@
 import React from "react";
 import "../Style/Modal.scss";
 
-const Modal = ({ onChangeType, onSubmitModal, setModalOpen, category }) => {
+const Modal = ({
+  modalOpen,
+  onChangeType,
+  onSubmitModal,
+  setModalOpen,
+  category,
+}) => {
+  console.log(modalOpen);
+
   return (
     <div className="modal">
       <div className="modal__background"></div>
@@ -9,45 +17,47 @@ const Modal = ({ onChangeType, onSubmitModal, setModalOpen, category }) => {
         <div className="modal__btn" onClick={() => setModalOpen(false)}>
           <div className="modal__btn--close">X</div>
         </div>
-        <div className="modal__wrapper--container">
-          <h2>필터</h2>
-          <form onSubmit={onSubmitModal}>
-            <div>
+        <div className="modal__container">
+          <h2 className="modal__form--name">필터</h2>
+          <form className="modal__form" onSubmit={onSubmitModal}>
+            <div className="modal__container--input">
               <input
-                className="form__input"
+                className="modal__form--input"
                 type="checkbox"
-                id="type 1"
+                id="type_1"
                 checked={category === "1"}
                 onChange={onChangeType}
                 value="1"
               ></input>
-              <label htmlFor="type 1">category_name</label>
+              <label htmlFor="type_1">apple</label>
             </div>
-            <div>
+            <div className="modal__container--input">
               <input
-                className="form__input"
+                className="modal__form--input"
                 type="checkbox"
-                id="type 2"
+                id="type_2"
                 checked={category === "2"}
                 onChange={onChangeType}
                 value="2"
               ></input>
-              <label htmlFor="type 2">category_name</label>
+              <label htmlFor="type_2">banana</label>
             </div>
-            <div>
+            <div className="modal__container--input">
               <input
-                className="form__input"
+                className="modal__form--input"
                 type="checkbox"
-                id="type 3"
+                id="type_3"
                 checked={category === "3"}
                 onChange={onChangeType}
                 value="3"
               ></input>
-              <label htmlFor="type 3">category_name</label>
+              <label htmlFor="type_3">coconut</label>
             </div>
-            <button className="modal__btn--submit" type="submit">
-              전송
-            </button>
+            <div className="modal__container--input">
+              <button className="modal__btn--submit" type="submit">
+                저장하기
+              </button>
+            </div>
           </form>
         </div>
       </div>

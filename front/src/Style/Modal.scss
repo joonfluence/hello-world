@@ -2,15 +2,16 @@
 @import "mixin.scss";
 
 .filter__wrapper {
-  width: 90%;
   display: flex;
-  margin-left: 30px;
+  margin-left: 2.7rem;
+  margin-right: 1.8rem;
 
   @include mobile {
-    width: 95%;
+    width: 90%;
     justify-content: space-between;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $lightgrey;
+    padding-bottom: 0.625rem;
+    margin: 0 auto;
+    box-shadow: 0px 1px 0px #00000012;
   }
 
   .filter__order,
@@ -22,7 +23,7 @@
   .filter__order {
     height: 19px;
     &:nth-child(2) {
-      margin-left: 10px;
+      margin-left: 0.625rem;
     }
 
     .filter__order--checkbox {
@@ -62,9 +63,10 @@
 
 .modal {
   .modal__background {
-    position: absolute;
+    position: fixed;
+    overflow-y: hidden;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
     top: 0;
     left: 0%;
@@ -73,37 +75,69 @@
 
   .modal__wrapper {
     position: absolute;
-    width: 460px;
-    height: 268px;
-    top: 35%;
+    width: 23.958%;
+    height: 33.857%;
+    top: 50%;
     left: 50%;
+    font-size: 1rem;
+    transform: translate(30%, -50%);
     margin: 0 0 0 -250px;
     background: #eee;
     z-index: 4;
-    & > div > h2 {
-      font-size: 1.5rem;
-      padding-top: 1.5rem;
+
+    @include mobile {
+      width: 80%;
+      height: 40%;
+      transform: translate(-20%, -50%);
+    }
+
+    .modal__form--name {
+      font-size: 2rem;
+      padding-top: 1rem;
     }
 
     .modal__btn--close {
       position: absolute;
+      color: $darkgrey;
       right: 0%;
-      width: 3rem;
+      width: 1rem;
+      height: 1rem;
+      margin: 0.5rem;
     }
 
-    .modal__wrapper--container {
+    .modal__container {
       margin: 0 auto;
-      width: 80%;
+      width: 90%;
 
-      form {
+      .modal__form {
         display: flex;
         flex-direction: column;
 
-        .modal__btn--submit {
-          width: 99px;
-          height: 40px;
-          background-color: $lightgreen;
-          margin-left: auto;
+        .modal__container--input {
+          font-size: 1.5rem;
+
+          .modal__form--input {
+            margin: 0.5rem;
+          }
+
+          .modal__btn--submit {
+            width: 6rem;
+            height: 2.5rem;
+            margin: 1rem;
+            background-color: $lightgreen;
+            float: right;
+
+            &::after {
+              clear: both;
+            }
+
+            @include mobile {
+              width: 100%;
+              height: 3rem;
+              margin: 2rem auto;
+              background-color: $lightgreen;
+            }
+          }
         }
       }
     }

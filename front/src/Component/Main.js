@@ -63,7 +63,9 @@ const Main = () => {
 
   return (
     <>
-      <Nav />
+      <Nav>
+        <div className="main__navigation--name">4월 8일 이준호</div>
+      </Nav>
       <main className="main">
         <div className="main__wrapper">
           <div className="main__login">

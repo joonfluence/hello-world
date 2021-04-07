@@ -15,6 +15,13 @@
     padding: 30px 10px 25px 10px;
   }
 
+  @include tablet {
+    border-left: 0px;
+    border-right: 0px;
+    margin: 17px 10px 30px 10px;
+    padding: 30px 10px 25px 10px;
+  }
+
   .main__AD--wrapper {
     display: flex;
     @include mobile_small {
@@ -46,9 +53,7 @@
 
     .main__AD--image {
       height: 179px;
-      @include mobile {
-        width: 100%;
-      }
+      width: 100%;
     }
 
     .main__AD--title {
