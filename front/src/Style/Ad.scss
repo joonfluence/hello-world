@@ -1,34 +1,64 @@
 @import "variable.scss";
+@import "mixin.scss";
 
 .main__AD {
-  display: flex;
+  border: 1px solid $grey_2;
+  margin: 17px 30px 30px 40px;
+  padding: 20px 30px 20px 30px;
+
+  @include mobile_small {
+    border-top: 1px solid $grey_2;
+    border-bottom: 1px solid $grey_2;
+    border-left: 0px;
+    border-right: 0px;
+    margin: 17px 10px 30px 10px;
+    padding: 30px 10px 25px 10px;
+  }
+
+  .main__AD--wrapper {
+    display: flex;
+    @include mobile_small {
+      flex-direction: column;
+    }
+  }
+
+  .main__AD--head {
+    color: $darkgrey;
+    padding-bottom: 20px;
+  }
 
   .main__AD--container {
     margin-right: 20px;
 
     &:nth-child(1) {
       width: 42.774%;
+      @include mobile_small {
+        width: 100%;
+      }
     }
 
     &:nth-child(2) {
       width: 57.226%;
+      @include mobile_small {
+        width: 100%;
+      }
     }
+
     .main__AD--image {
-      width: 100%;
       height: 179px;
-      border: 1px solid $grey_2;
+      @include mobile {
+        width: 100%;
+      }
     }
 
     .main__AD--title {
-      @include ellipsis(2, 27.5px);
-      // width: 463px;
       font-size: 18px;
       font-weight: 600;
+      @include ellipsis(2, 27.5px);
     }
 
     .main__AD--description {
       @include ellipsis(4, 25px);
-      // width: 465px;
     }
   }
 }

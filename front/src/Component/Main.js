@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getPostList, getADList } from "../api";
 import "../Style/main.scss";
 import "../Style/Ad.scss";
+import "../Style/Modal.scss";
 import Ad from "./Ad";
 import Filter from "./Filter";
 import Nav from "./Nav";
@@ -77,7 +78,7 @@ const Main = () => {
             />
             {list.length > 0 &&
               list.map((item, i) => (
-                <div>
+                <div className="main__wrapper--ad">
                   <div className="main__wrapper--content" key={item.id}>
                     <Link to={`/` + item.id}>
                       <div className="main__header">

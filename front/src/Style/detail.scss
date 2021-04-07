@@ -1,11 +1,12 @@
 @import "variable.scss";
+@import "mixin.scss";
 
 .detail__wrapper {
   margin-top: 50px;
   .detail__content {
     border: 1px solid $lightgreen;
     margin: 0 auto;
-    width: 1140px;
+    width: 59.375%;
 
     div {
       padding: 0 30px 0 30px;
@@ -30,7 +31,7 @@
 
   .reply__container {
     margin: 0 auto;
-    width: 1140px;
+    width: 59.375%;
 
     .reply__number {
       margin-top: 31px;

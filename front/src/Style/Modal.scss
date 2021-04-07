@@ -1,9 +1,17 @@
 @import "variable.scss";
+@import "mixin.scss";
 
 .filter__wrapper {
-  width: 93.755%;
+  width: 90%;
   display: flex;
-  margin-left: 40px;
+  margin-left: 30px;
+
+  @include mobile {
+    width: 95%;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $lightgrey;
+  }
 
   .filter__order,
   .filter__btn--open {
@@ -13,7 +21,6 @@
 
   .filter__order {
     height: 19px;
-
     &:nth-child(2) {
       margin-left: 10px;
     }

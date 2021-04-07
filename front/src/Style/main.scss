@@ -1,4 +1,5 @@
 @import "variable.scss";
+@import "mixin.scss";
 
 main {
   .main__wrapper {
@@ -6,6 +7,11 @@ main {
     width: 59.375%;
     margin: 0 auto;
     margin-top: 50px;
+
+    @include mobile {
+      width: 100%;
+      margin: 10px;
+    }
 
     .main__login {
       margin: 0 auto;
@@ -21,17 +27,30 @@ main {
         font-size: 22px;
         color: $white;
       }
+      @include mobile {
+        display: none;
+      }
     }
 
     .main__wrapper--container {
       width: 79.377%;
+      @include mobile {
+        width: 100%;
+      }
     }
 
-    .main__wrapper--content,
-    .main__AD {
+    .main__wrapper--content {
       border: 1px solid $grey_2;
       margin: 17px 30px 30px 40px;
       padding: 20px 30px 20px 30px;
+
+      @include mobile {
+        display: flex;
+        margin: 10px;
+        border: none;
+        padding: 15px;
+        flex-direction: column;
+      }
     }
 
     .main__header--top {
@@ -61,9 +80,15 @@ main {
         width: 1px;
         height: 15px;
         background-color: $grey_2;
+        @include mobile {
+          display: none;
+        }
       }
       .main__header--date {
         color: $deepgrey;
+        @include mobile {
+          display: none;
+        }
       }
     }
 

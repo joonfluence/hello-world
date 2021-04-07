@@ -26,7 +26,7 @@ const Detail = ({
         <Nav />
         <div className="detail__wrapper">
           {Object.keys(detail).length !== 0 && (
-            <>
+            <div>
               <div className="detail__content">
                 <div className="detail__content--title">{detail.title}</div>
                 <div className="detail__content--description">
@@ -53,7 +53,7 @@ const Detail = ({
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
