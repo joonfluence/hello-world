@@ -21,4 +21,8 @@
 
 4. 이슈 핸들링
 
-- [X] 링크 : https://github.com/heyJoon/react-ui-implementation/issues
+- 링크 : https://github.com/heyJoon/react-ui-implementation/issues
+
+5. 배포
+
+- 링크 : https://relaxed-goodall-fa14e0.netlify.app/
