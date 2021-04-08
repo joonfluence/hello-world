@@ -6,11 +6,11 @@
   font-size: 1.8rem;
   padding: 1.5rem;
   font-weight: 600;
-  visibility: hidden;
+  cursor: pointer;
+  margin-left: 10rem;
 
   @include mobile_small {
-    visibility: visible;
-    cursor: pointer;
+    margin-left: 0;
   }
 }
 

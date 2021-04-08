@@ -28,7 +28,9 @@ const Detail = ({
   return (
     <div>
       <Nav>
-        <div onClick={clickHander}>＜</div>
+        <div className="main__navigation--back" onClick={clickHander}>
+          ＜
+        </div>
       </Nav>
       <div className="detail__wrapper">
         {Object.keys(detail).length !== 0 && (
