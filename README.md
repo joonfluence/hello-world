@@ -21,4 +21,4 @@
 
 4. 이슈 핸들링
 
-- 링크 : https://github.com/heyJoon/react-ui-implementation/issues
+- [X] 링크 : https://github.com/heyJoon/react-ui-implementation/issues
