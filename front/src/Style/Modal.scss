@@ -85,10 +85,16 @@
     background: #eee;
     z-index: 4;
 
-    @include mobile {
+    @include tablet {
       width: 80%;
       height: 40%;
-      transform: translate(-20%, -50%);
+      transform: translate(-10%, -50%);
+    }
+
+    @include mobile_small {
+      width: 80%;
+      height: 40%;
+      transform: translate(10%, -50%);
     }
 
     .modal__form--name {
