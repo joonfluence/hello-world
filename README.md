@@ -18,3 +18,7 @@
 - [X] React Hooks를 활용하여 함수형 컴포넌트 활용
 - [X] 컴포넌트 분리 및 재사용
 - [X] 모바일 대응을 위한 반응형 웹 페이지 구성
+
+4. 이슈 핸들링
+
+- 링크 : https://github.com/heyJoon/react-ui-implementation/issues
