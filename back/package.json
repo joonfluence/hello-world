@@ -1,0 +1,38 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "리액트와 익스프레스로 구현한 고객관리 시스템입니다",
+  "main": "index.js",
+  "scripts": {
+    "dev:client": "cd client && npm run start",
+    "dev:server": "cross-env NODE_ENV=development nodemon init.js",
+    "server": "nodemon index.js",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heyJoon/react-express-blog.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "Chris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heyJoon/react-express-blog/issues"
+  },
+  "homepage": "https://github.com/heyJoon/react-express-blog#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.4.1",
+    "mongoose": "^5.12.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1"
+  },
+  "type": "module"
+}
