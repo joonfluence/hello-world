@@ -1,4 +1,4 @@
-### react-ui-implementations (Commento Subject)
+### HelloWorld (프론트엔드 웹 피드 페이지)
 
 1. 소개
 
@@ -11,6 +11,7 @@
 - [X] 정렬(오름차순, 내림차순)
 - [X] 광고 추가하기
 - [X] 메인 페이지와 디테일 페이지 연동하기
+- [X] 인피니트 스크롤링
 
 3. Works
 

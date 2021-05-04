@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getPostList, getADList } from "../api";
+import { getPostList, getADList, getCategoryList } from "../api";
 import "../Style/main.scss";
 import "../Style/Ad.scss";
 import "../Style/Modal.scss";
@@ -15,10 +15,20 @@ const Main = () => {
   const [list, setList] = useState([]);
   const [adList, setAdList] = useState([]);
   const [timer, changeTimer] = useState(true);
+  const [category, setCategory] = useState([]);
 
   const CATEGORY_ID_1 = "apple";
   const CATEGORY_ID_2 = "banana";
   const CATEGORY_ID_3 = "coconut";
+
+  const fetchCategoryList = async () => {
+    const temp = await getCategoryList();
+    setCategory(temp);
+  };
+
+  useEffect(() => {
+    fetchCategoryList();
+  }, []);
 
   const fetchADList = async (pageNum, limitNum) => {
     const temp = await getADList(pageNum, limitNum);
@@ -64,12 +74,12 @@ const Main = () => {
   return (
     <>
       <Nav>
-        <div className="main__navigation--name">4월 8일 이준호</div>
+        <div className="navigation__name">4월 8일 이준호</div>
       </Nav>
       <main className="main">
         <div className="main__wrapper">
           <div className="main__login">
-            <span>로그인</span>
+            <span className="main__login--comment">로그인</span>
           </div>
           <div className="main__wrapper--container">
             <Filter

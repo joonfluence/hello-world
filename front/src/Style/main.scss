@@ -23,7 +23,7 @@ main {
       background: $lightgreen 0% 0% no-repeat padding-box;
       border-radius: 5px;
       opacity: 1;
-      span {
+      .main__login--comment {
         font-size: 22px;
         color: $white;
       }

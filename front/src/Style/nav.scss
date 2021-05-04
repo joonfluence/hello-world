@@ -1,14 +1,14 @@
 @import "variable.scss";
 @import "mixin.scss";
 
-.main__navigation {
+.navigation {
   height: 70px;
   text-align: left;
   color: $blackgrey_1;
   font-size: 16px;
   box-shadow: 0px 1px 5px $whitegrey_2;
 
-  .main__navigation--name {
+  .navigation__name {
     width: 59.375%;
     margin: 0 auto;
     padding: 23px 0 23px 0;

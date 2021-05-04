@@ -4,7 +4,7 @@
   "description": "리액트와 익스프레스로 구현한 고객관리 시스템입니다",
   "main": "index.js",
   "scripts": {
-    "dev:client": "cd client && npm run start",
+    "dev:client": "cd ../front && npm run start",
     "dev:server": "cross-env NODE_ENV=development nodemon init.js",
     "server": "nodemon index.js",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
